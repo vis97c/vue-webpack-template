@@ -2,5 +2,6 @@
 node_modules
 public_html
 package-lock.json
+src/js/compiled-icons
 *.lock
 .env
