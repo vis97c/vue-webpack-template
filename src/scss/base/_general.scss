@@ -18,10 +18,6 @@ html{
 h1,h2,h3,h4,h5,h6{
 	font-family: $second_font;
 }
-svg{
-	width: 100%;
-	height: auto;
-}
 i{
 	&[class*='fa-']{
 		font-size:1em;
@@ -39,41 +35,29 @@ i{
 	user-select: none; // unselectable
 	touch-action: manipulation; // disables tap zoom
 }
-img:not(.emoji){
-	text-align: center;
+/*inicia img styling*/
+img{
+	display: block;
 	overflow: hidden;
+	color: #fff;
 	&:before{
-		content: 'No se pudo cargar la imagen </3';
-		background: #000;
-		display: inline-block;
-		padding: 30px 30px 30px 20px;
-		font-weight: 400;
-		color: $secondary;
-		z-index: 1;
-	}
-	&:after{
-		content: '';
-		display: block;
-		background:#000;
-		z-index: 0;
-		width: 20px;
+		content: '\f7a9';
+		font-family: "Font Awesome 5 Free";
+		font-weight: 900;
+		color: #e74c3c;
+		font-size: 72px;
+		width: 100%;
 		height: 100%;
 		position: absolute;
 		top: 0;
-		left:0;
+		left: 0;
+		padding: 10px;
+		@include linear-gradient(135deg, #d4d4d4 0, #00b6ff 500%);
+		@include box-sizing(border-box);
+		@include flexbox(column, nowrap, center, center);
 	}
 }
-
-body > img {
-	width: auto!important;
-	height: auto!important;
-}
-
-img:not(.emoji) {
-	width: 100%;
-	height: auto;
-	overflow: hidden;
-}
+/*termina img styling*/
 
 .hidden{
 	display: none;
@@ -91,111 +75,6 @@ code{
 	white-space: pre-wrap;
 	@include border-radius(3px);
 }
-form{
-	.button{
-		width: 100%;
-	}
-	input[type="text"], input[type="email"], input[type="password"], input[type="url"], input[type="radio"], textarea:not(.markup){
-		@include font-size(2);
-		@include box-sizing(border-box);
-		@include transition(.3s all ease-out);
-	}
-	input[type="text"], input[type="email"], input[type="password"], input[type="url"]{
-		height: 45px;
-		width: 100%;
-		background: transparent;
-		border-bottom: 4px solid negro(1);
-		padding: 0 15px;
-		color: $primary;
-		@include flexbox(row, nowrap, flex-start, center);
-		&:focus, &:hover{
-			background: negro(1);
-			border-bottom: 4px solid $secondary;
-		}
-		&[readonly]{
-			color: $secondary;
-			border-bottom: 4px solid blanco('05');
-			&:focus, &:hover{
-				background: transparent;
-				border-bottom: 4px solid blanco('05');
-			}
-		}
-		&[data-error]{
-			color: $narrojo;
-			border-bottom: 4px solid $narrojo;
-			&:focus, &:hover{
-				border-bottom: 4px solid $narrojo;
-			}
-		}
-	}
-	input[type="radio"]{
-		width: 2em;
-		height: 2em;
-		border: 3px solid negro(1);
-		cursor: pointer;
-		@include border-radius(50%);
-		&:checked{
-			border: 3px solid $narrojo;
-			&:hover{
-				border: 3px solid $narrojo;
-			}
-			&:after {
-				background-color: #fff;
-			}
-		}
-		&:hover{
-			border: 3px solid #fff;
-			&:after {
-				background-color: #fff;
-			}
-		}
-		&:after{
-			content: '';
-			display: block;
-			background-color: #444;
-			width: calc(100% - .6em);
-			height: calc(100% - .6em);
-			margin: .3em;
-			@include border-radius(50%);
-			@include box-sizing(border-box);
-		}
-	}
-	textarea:not(.markup){
-		width: 100%;
-		min-height: 100px;
-		background: negro(1);
-		padding: 15px;
-		color: $primary;
-		border: 1px solid transparent;
-		@include font-size(4);
-		@include border-radius(3px);
-		&:focus, &:hover{
-			border: 1px solid $secondary;
-		}
-	}
-	a, label{
-		display: block;
-		@include font-size();
-	}
-	a{
-		text-align: center;
-	}
-	label{
-		color: $secondary;
-		&:first-letter{
-			text-transform: capitalize;
-		}
-		&[data-error]{
-			color: $narrojo;
-		}
-		&[for]{
-			cursor: pointer;
-		}
-	}
-	.error{
-		color: $narrojo;
-	}
-}
 blockquote{
 	color: $greentext;
 	-webkit-margin-after: 0;
@@ -212,22 +91,6 @@ blockquote{
 		color: inherit!important;
 	}
 }
-//inicia EMOJI-MART
-.emoji-mart{
-	z-index:2;
-	position: fixed;
-	top: 50%;
-	left: 50%;
-	font-family:inherit !important;
-	@include box-shadow(5px 5px 15px negro(25));
-	@include transform(translate(-50%, -50%));
-	svg{
-		*{
-			fill: negro(4);
-		}
-	}
-}
-//termina EMOJI-MART
 .controls{
 	@include flexbox(row, nowrap, flex-end, center);
 	> *{
@@ -240,12 +103,32 @@ blockquote{
 .icon{
 	height: auto;
 	@include flexbox(row, nowrap, center, center);
+	&[data-size~="_55"]{
+		width: 55px;
+		font-size: 55px;
+	}
+	&[data-size~="_45"]{
+		width: 45px;
+		font-size: 45px;
+	}
 	&[data-size~="_35"]{
 		width: 35px;
 		font-size: 35px;
 	}
+	&[data-size~="_30"]{
+		width: 30px;
+		font-size: 30px;
+	}
 	&[data-size~="_25"]{
 		width: 25px;
 		font-size: 25px;
+	}
+	&[data-size~="_20"]{
+		width: 20px;
+		font-size: 20px;
+	}
+	&[data-size~="_15"]{
+		width: 15px;
+		font-size: 15px;
 	}
 }
