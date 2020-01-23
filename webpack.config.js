@@ -61,19 +61,36 @@ var config = {
 					 * MiniCssExtractPlugin doesn't support HMR.
 					 * For developing, use 'style-loader' instead.
 					 * */
-                    isProduction ? MiniCssExtractPlugin.loader : 'vue-style-loader',
-                    'css-loader' + (!isProduction ? '?sourceMap' : ''),
+                    ...(isProduction
+						? [
+								MiniCssExtractPlugin.loader, // Creates `style` nodes from JS strings
+								"css-loader", // Translates CSS into CommonJS
+						  ]
+						: ["vue-style-loader", "css-loader?sourceMap"]),
                 ]
             },
             {
                 test: /\.s[ac]ss$/i,
                 use: [
-                    // Creates `style` nodes from JS strings
-                    isProduction ? MiniCssExtractPlugin.loader : 'vue-style-loader',
-                    // Translates CSS into CommonJS
-                    'css-loader' + (!isProduction ? '?sourceMap' : ''),
-                    // Compiles Sass to CSS
-                    'sass-loader' + (!isProduction ? '?sourceMap' : ''),
+                    ...(isProduction
+						? [
+								MiniCssExtractPlugin.loader, // Creates `style` nodes from JS strings
+								"css-loader", // Translates CSS into CommonJS
+								{
+									loader: "postcss-loader",
+									options: {
+										plugins: () => [
+											require("autoprefixer"),
+										], // autoprefixer
+									},
+								},
+								"sass-loader", // Compiles Sass to CSS
+						  ]
+						: [
+								"vue-style-loader",
+								"css-loader?sourceMap",
+								"sass-loader?sourceMap",
+						  ]),
                 ],
             },
             {
