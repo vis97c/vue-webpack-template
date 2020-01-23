@@ -21,16 +21,19 @@
 		"@vue/cli": "^4.1.1",
 		"@vue/cli-plugin-babel": "^4.1.1",
 		"@vue/cli-service": "^3.8.0",
+		"autoprefixer": "^9.7.4",
 		"babel-loader": "^8.0.6",
 		"copy-webpack-plugin": "^5.0.5",
 		"cross-env": "^5.2.0",
 		"css-loader": "^2.1.1",
-		"friendly-errors-webpack-plugin": "^1.7.0",
+		"eslint-plugin-prettier": "^3.1.2",
 		"html-beautify-webpack-plugin": "^1.0.5",
 		"html-webpack-plugin": "^3.2.0",
 		"mini-css-extract-plugin": "^0.6.0",
 		"node-sass": "^4.13.0",
 		"optimize-css-assets-webpack-plugin": "^5.0.3",
+		"postcss-loader": "^3.0.0",
+		"prettier": "1.19.1",
 		"purgecss-webpack-plugin": "^1.6.0",
 		"sass-loader": "^8.0.0",
 		"terser-webpack-plugin": "^2.2.2",
@@ -53,10 +56,15 @@
 		"vue-router": "^3.1.2"
 	},
 	"resolutions": {
-		"node-notifier": "6.0.0"
+		"webpack-notifier/node-notifier": "6.0.0"
 	},
 	"browserslist": [
-		"last 1 chrome versions"
+		"defaults",
+		"not ie < 11",
+		"last 2 versions",
+		"> 1%",
+		"iOS 7",
+		"last 3 iOS versions"
 	],
 	"eslintConfig": {
 		"root": true,

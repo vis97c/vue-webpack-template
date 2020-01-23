@@ -82,14 +82,6 @@ Con esto listo ya cuenta con todo lo necesario para crear y adaptar su nuevo pro
 
 Configuracion adicional.
 
-- - El watcher requiere definir una ruta proxy con la ubicacion de los archivos, Para su comodidad basta con configurar el archivo "**.env**" de la siguiente forma:
-
-- - - En el root del proyecto duplique el archivo "**.env-example**" y guardelo como "**.env**" sin ningun tipo de extension, se recomienda usar un editor de texto plano para ello.
-
-- - - Abra el archivo recien creado y en la linea "**PROXY_URL**" reemplazela por la ubicacion del directorio "**public_html**".
-
-- - - Por ejemplo "**localhost/root_de_su_proyecto/public_html**" o "**su_dominio_virtual.test**" asumiendo que este ultimo apunta al directorio publico de su proyecto.
-
 - Si desea modificar alguno de los parametros de webpack basta con sobreescribir su configuracion a travez del archivo "**webpack.config.js**". Para mas informacion acerca del mismo remitase a la documentacion de [webpack.js](https://webpack.js.org/configuration/).
 
 ## Uso
