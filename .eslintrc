@@ -1,0 +1,11 @@
+{
+	"root": true,
+	"parserOptions": {
+		"parser": "babel-eslint"
+	},
+	"extends": ["plugin:vue/essential", "eslint:recommended"],
+	"plugins": ["prettier"],
+	"rules": {
+		"prettier/prettier": "error"
+	}
+}
