@@ -1,16 +1,17 @@
+<!-- @format -->
 <template>
 	<div id="app">
-		<Docs></Docs>
+		<Docs />
 	</div>
 </template>
 
 <script>
-import Docs from '_components/Docs.vue'
+	import Docs from "_components/Docs.vue";
 
-export default {
-	name: 'Home',
-	components: {
-		Docs
-	},
-}
+	export default {
+		name: "Home",
+		components: {
+			Docs,
+		},
+	};
 </script>

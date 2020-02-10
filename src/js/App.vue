@@ -1,33 +1,26 @@
+<!-- @format -->
 <template>
 	<div id="appex">
-		<img alt="Vue logo" src="./../assets/logo.png">
+		<img alt="Vue logo" src="./../assets/logo.png" />
 		<transition name="fade">
-			<router-view></router-view>
+			<router-view />
 		</transition>
 	</div>
 </template>
 
 <script>
-
-	import '../scss/main.scss'
+	import "../scss/main.scss";
 	// import miComponente from '_components/mi_componente.vue'
 
 	export default {
-		name: 'App',
+		name: "App",
 		components: {
 			// miComponente
 		},
 		data() {
 			return {
 				// variable: 'valor';
-			}
-		},
-		methods: {
-			// metodo: function(section) {
-			// 	let _this = this;
-			// 	//tu funcion
-			// 	return
-			// },
+			};
 		},
 		computed: {
 			// computado(){
@@ -36,12 +29,12 @@
 		},
 		// INICIA LIFEHOOKS
 		// para mas detalles revise la documentacion de vue.js 2.0
-		beforeCreate(){},
+		beforeCreate() {},
 		created() {
 			// el contenido ha sido creado y ahora hace parte del virtualDOM
 			// free land
 		},
-		beforeMount(){},
+		beforeMount() {},
 		mounted() {
 			// La plantilla a sido montada en el DOM
 		},
@@ -50,17 +43,24 @@
 		beforeDestroy() {
 			// window.removeEventListener('scroll');
 		},
-		destroyed() {}
+		destroyed() {},
+		methods: {
+			// metodo: function(section) {
+			// 	let _this = this;
+			// 	//tu funcion
+			// 	return
+			// },
+		},
 		// TERMINA LIFEHOOKS
-	}
+	};
 </script>
 
 <style lang="scss" scoped>
-	@import '../scss/base/vue.scss';
-	#appex{
-		position:relative;
-		margin:0;
-		min-height:100vh;
+	@import "../scss/base/vue.scss";
+	#appex {
+		position: relative;
+		margin: 0;
+		min-height: 100vh;
 		display: -webkit-box;
 		display: -ms-flexbox;
 		display: flex;
@@ -75,7 +75,7 @@
 		-ms-flex-align: center;
 		align-items: center;
 	}
-	img{
+	img {
 		width: auto;
 		margin: 0 auto;
 	}

@@ -1,16 +1,17 @@
+<!-- @format -->
 <template>
 	<div>
-		<HelloWorld msg="Welcome to Your Vue.js App"></HelloWorld>
+		<HelloWorld msg="Welcome to Your Vue.js App" />
 	</div>
 </template>
 
 <script>
-import HelloWorld from '_components/HelloWorld.vue'
+	import HelloWorld from "_components/HelloWorld.vue";
 
-export default {
-	name: 'Home',
-	components: {
-		HelloWorld
-	},
-}
+	export default {
+		name: "Home",
+		components: {
+			HelloWorld,
+		},
+	};
 </script>

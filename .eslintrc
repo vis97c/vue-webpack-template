@@ -1,11 +1,54 @@
 {
 	"root": true,
 	"parserOptions": {
-		"parser": "babel-eslint"
+		"parser": "babel-eslint",
+		"sourceType": "module",
+		"allowImportExportEverywhere": false,
+		"ecmaVersion": 2015,
+		"ecmaFeatures": {
+			"globalReturn": false
+		}
 	},
-	"extends": ["plugin:vue/essential", "eslint:recommended"],
+	"env": {
+		"node": true,
+		"browser": true
+	},
+	"extends": ["plugin:vue/recommended", "eslint:recommended"],
 	"plugins": ["prettier"],
 	"rules": {
-		"prettier/prettier": "error"
-	}
+		"no-extra-boolean-cast": "off",
+		"vue/singleline-html-element-content-newline": "off",
+		"vue/script-indent": "off",
+		"prettier/prettier": [
+			"error",
+			{
+				"endOfLine": "auto"
+			}
+		],
+		"vue/html-indent": "off",
+		"vue/max-attributes-per-line": [
+			"error",
+			{
+				"singleline": 3
+			}
+		],
+		"vue/html-self-closing": [
+			"error",
+			{
+				"html": {
+					"void": "always",
+					"normal": "never"
+				}
+			}
+		],
+		"no-mixed-spaces-and-tabs": ["warn", "smart-tabs"]
+	},
+	"overrides": [
+		{
+			"files": ["*.vue"],
+			"rules": {
+				"indent": "off"
+			}
+		}
+	]
 }
