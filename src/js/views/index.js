@@ -14,8 +14,6 @@ function loadView(view) {
 // loadView('_vista')
 
 const views = new VueRouter({
-	linkActiveClass: "active",
-	mode: "history",
 	routes: [
 		{
 			path: "/",
@@ -63,7 +61,7 @@ const views = new VueRouter({
 });
 views.beforeEach((to, from, next) => {
 	/* It will change the title when the router is change*/
-	document.title = to.meta.title ? to.meta.title : initialState.meta.title; // resets and defaults to stored title if it doesn't have one
+	document.title = to.meta.title ? to.meta.title : domState.meta.title; // resets and defaults to stored title if it doesn't have one
 	next();
 });
 export default views;
