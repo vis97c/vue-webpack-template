@@ -9,7 +9,6 @@
 </template>
 
 <script>
-	import "../scss/main.scss";
 	// import miComponente from '_components/mi_componente.vue'
 
 	export default {
@@ -56,7 +55,7 @@
 </script>
 
 <style lang="scss" scoped>
-	@import "../scss/base/vue.scss";
+	@import "_scss/utils/module.scss";
 	#appex {
 		position: relative;
 		margin: 0;

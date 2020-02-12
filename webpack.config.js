@@ -184,6 +184,70 @@ if (isProduction) {
 		optimization: {
 			splitChunks: {
 				chunks: "all",
+				cacheGroups: {
+					vendor: {
+						test: /(node_modules|vendors).+(?<!css)$/,
+						name: m => {
+							// get the name. E.g. node_modules/packageName/not/this/part.js
+							// or node_modules/packageName
+							const packageName = m.context.match(
+								/[\\/]node_modules[\\/](.*?)([\\/]|$)/
+							)[1];
+
+							// npm package names are URL-safe, but some servers don't like @ symbols
+							return `pkg.${packageName.replace("@", "")}`;
+						},
+						reuseExistingChunk: true,
+						enforce: true,
+						chunks: "all",
+						minSize: 10000,
+					},
+					// Split Vue chunks
+					vue: {
+						name: m => {
+							if (m.constructor.name !== "CssModule") {
+								if ("rawRequest" in m) {
+									var moduleName = m["rawRequest"].split("/");
+									moduleName = moduleName[
+										moduleName.length - 1
+									]
+										.split("?")[0]
+										.split(".")[0]
+										.replace("_", "");
+									return moduleName;
+								} else if (m.context.includes("node_modules")) {
+									// get the name. E.g. node_modules/packageName/not/this/part.js
+									// or node_modules/packageName
+									const packageName = m.context.match(
+										/[\\/]node_modules[\\/](.*?)([\\/]|$)/
+									)[1];
+
+									// npm package names are URL-safe, but some servers don't like @ symbols
+									return `pkg.${packageName.replace(
+										"@",
+										""
+									)}`;
+								}
+								return "vue";
+							}
+							return "styles";
+						},
+						test: /\.vue$/,
+						reuseExistingChunk: true,
+						enforce: true,
+						chunks: "all",
+						minSize: 0,
+					},
+					// Merge all the CSS into one file
+					styles: {
+						name: "styles",
+						test: /\.s?css$/,
+						reuseExistingChunk: true,
+						enforce: true,
+						chunks: "all",
+						minSize: 20000,
+					},
+				},
 			},
 			minimize: true,
 			minimizer: [

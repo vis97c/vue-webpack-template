@@ -11,10 +11,13 @@
 	export default {
 		name: "NotFound",
 		props: {
-			msg: String,
+			msg: { type: String, default: "Your message" },
 		},
 	};
 </script>
+<style lang="scss">
+	// @import "~_scss/utils/module.scss";
+</style>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>

@@ -1,5 +1,5 @@
 /** @format */
-/* globals domState */
+/* globals seo */
 import Vue from "vue";
 import VueRouter from "vue-router";
 
@@ -62,7 +62,7 @@ const views = new VueRouter({
 });
 views.beforeEach((to, from, next) => {
 	/* It will change the title when the router is change*/
-	document.title = to.meta.title ? to.meta.title : domState.meta.title; // resets and defaults to stored title if it doesn't have one
+	document.title = to.meta.title ? to.meta.title : seo.meta.title; // resets and defaults to stored title if it doesn't have one
 	next();
 });
 export default views;

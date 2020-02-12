@@ -15,3 +15,6 @@
 		},
 	};
 </script>
+<style lang="scss">
+	// @import "~_scss/utils/module.scss";
+</style>

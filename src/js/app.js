@@ -13,6 +13,9 @@ console.log(
 window.$ = window.jQuery = require("jquery");
 import Vue from "vue";
 import * as svgicon from "vue-svgicon";
+
+import "_scss/main.scss";
+
 import router from "./views";
 import App from "./App.vue";
 
