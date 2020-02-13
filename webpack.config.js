@@ -12,6 +12,21 @@ const VueLoaderPlugin = require("vue-loader/lib/plugin");
 
 const mode = process.env.NODE_ENV || "development";
 const isProduction = mode === "production";
+
+function pkg(m) {
+	// get the name. E.g. node_modules/packageName/not/this/part.js
+	// or node_modules/packageName
+	const packageName = m.context
+		.match(/[\\/]node_modules[\\/](.*?)([\\/]|$)/)[1]
+		.replace("@", "");
+
+	// npm package names are URL-safe, but some servers don't like @ symbols
+	if (packageName.includes("vue")) {
+		return `pkg.vueCommons`;
+	}
+	return `pkg.${packageName}`;
+}
+
 //webpack defaults
 var config = {
 	entry: {
@@ -188,14 +203,7 @@ if (isProduction) {
 					vendor: {
 						test: /(node_modules|vendors).+(?<!css)$/,
 						name: m => {
-							// get the name. E.g. node_modules/packageName/not/this/part.js
-							// or node_modules/packageName
-							const packageName = m.context.match(
-								/[\\/]node_modules[\\/](.*?)([\\/]|$)/
-							)[1];
-
-							// npm package names are URL-safe, but some servers don't like @ symbols
-							return `pkg.${packageName.replace("@", "")}`;
+							return pkg(m);
 						},
 						reuseExistingChunk: true,
 						enforce: true,
@@ -206,31 +214,42 @@ if (isProduction) {
 					vue: {
 						name: m => {
 							if (m.constructor.name !== "CssModule") {
-								if ("rawRequest" in m) {
-									var moduleName = m["rawRequest"].split("/");
+								if (m.context.includes("node_modules")) {
+									//	PACKAGE
+									return pkg(m);
+								} else if ("rawRequest" in m) {
+									var moduleName = m.rawRequest.split("/");
 									moduleName = moduleName[
 										moduleName.length - 1
 									]
 										.split("?")[0]
-										.split(".")[0]
-										.replace("_", "");
-									return moduleName;
-								} else if (m.context.includes("node_modules")) {
-									// get the name. E.g. node_modules/packageName/not/this/part.js
-									// or node_modules/packageName
-									const packageName = m.context.match(
-										/[\\/]node_modules[\\/](.*?)([\\/]|$)/
-									)[1];
-
-									// npm package names are URL-safe, but some servers don't like @ symbols
-									return `pkg.${packageName.replace(
-										"@",
-										""
-									)}`;
+										.split(".")[0];
+									if (
+										m.context.includes(
+											"src\\js\\components"
+										)
+									) {
+										// COMPONENT
+										moduleName =
+											moduleName.charAt(0).toLowerCase() +
+											moduleName.slice(1);
+										return `component.${moduleName}`;
+									} else if (
+										m.context.includes("src\\js\\views")
+									) {
+										// VIEW, this mimics the [request] naming
+										var pre = String.raw`${m.context}`.replace(
+												/\\/gi,
+												"-"
+											),
+											prefix =
+												pre.split("views-")[1] + "-";
+										return `view.${prefix +
+											moduleName}-vue`;
+									}
 								}
-								return "vue";
 							}
-							return "styles";
+							return "bundle";
 						},
 						test: /\.vue$/,
 						reuseExistingChunk: true,
@@ -240,7 +259,7 @@ if (isProduction) {
 					},
 					// Merge all the CSS into one file
 					styles: {
-						name: "styles",
+						name: "bundle",
 						test: /\.s?css$/,
 						reuseExistingChunk: true,
 						enforce: true,
