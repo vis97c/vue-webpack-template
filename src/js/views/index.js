@@ -9,7 +9,7 @@ Vue.use(VueRouter);
 function loadView(view) {
 	return () =>
 		import(
-			/* webpackChunkName: "view-[request]" */ `_src/js/views/${view}.vue`
+			/* webpackChunkName: "view.[request]" */ `_src/js/views/${view}.vue`
 		);
 }
 // loadView('_vista')
