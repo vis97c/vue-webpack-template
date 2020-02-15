@@ -1,0 +1,133 @@
+Arguments: 
+  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js
+
+PATH: 
+  C:\Users\vis97\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\local\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\vis97\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0;C:\WINDOWS\System32\OpenSSH;C:\Program Files\Git\cmd;C:\xampp\php;C:\ProgramData\ComposerSetup\bin;C:\Program Files\nodejs;C:\xampp\pgsql\12\bin;C:\xampp\pgsql\12\lib;C:\Program Files\erl10.3\bin;C:\Program Files\erl10.3\lib;C:\Program Files\erl10.5\bin;C:\Program Files (x86)\Elixir\bin;C:\WINDOWS\system32\config\systemprofile\.mix\escripts;C:\Program Files (x86)\Yarn\bin;C:\Users\vis97\AppData\Local\Microsoft\WindowsApps;C:\Users\vis97\AppData\Roaming\Composer\vendor\bin;C:\Users\vis97\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\vis97\AppData\Roaming\npm;C:\Users\vis97\AppData\Local\Yarn\bin;C:\Program Files\Git\usr\bin\vendor_perl;C:\Program Files\Git\usr\bin\core_perl
+
+Yarn version: 
+  1.21.1
+
+Node version: 
+  10.16.3
+
+Platform: 
+  win32 x64
+
+Trace: 
+  Error: https://registry.yarnpkg.com/rxjs/-/rxjs-6.5.4.tgz: ESOCKETTIMEDOUT
+      at ClientRequest.<anonymous> (C:\Program Files (x86)\Yarn\lib\cli.js:141292:19)
+      at Object.onceWrapper (events.js:286:20)
+      at ClientRequest.emit (events.js:198:13)
+      at TLSSocket.emitRequestTimeout (_http_client.js:662:40)
+      at Object.onceWrapper (events.js:286:20)
+      at TLSSocket.emit (events.js:198:13)
+      at TLSSocket.Socket._onTimeout (net.js:442:8)
+      at ontimeout (timers.js:436:11)
+      at tryOnTimeout (timers.js:300:5)
+      at listOnTimeout (timers.js:263:5)
+
+npm manifest: 
+  {
+  	"name": "@vis97c/vue-webpack-template",
+  	"version": "1.0.0",
+  	"description": "Template for a vue spa usign webpack",
+  	"main": "public_html/js/app.js",
+  	"author": "@vis97c",
+  	"scripts": {
+  		"production": "cross-env NODE_ENV=production webpack",
+  		"dev": "cross-env NODE_ENV=development webpack",
+  		"watch": "webpack-dev-server",
+  		"g_icons": "vsvg -s ./svg-icons -t ./src/js/compiled-icons"
+  	},
+  	"devDependencies": {
+  		"@babel/core": "^7.7.4",
+  		"@babel/plugin-proposal-class-properties": "^7.7.4",
+  		"@babel/plugin-proposal-decorators": "^7.7.4",
+  		"@babel/plugin-proposal-json-strings": "^7.7.4",
+  		"@babel/plugin-syntax-dynamic-import": "^7.7.4",
+  		"@babel/plugin-syntax-import-meta": "^7.7.4",
+  		"@babel/preset-env": "^7.7.4",
+  		"@vue/cli": "^4.1.1",
+  		"@vue/cli-plugin-babel": "^4.1.1",
+  		"@vue/cli-service": "^3.8.0",
+  		"autoprefixer": "^9.7.4",
+  		"babel-eslint": "^10.0.3",
+  		"babel-loader": "^8.0.6",
+  		"copy-webpack-plugin": "^5.0.5",
+  		"cross-env": "^5.2.0",
+  		"css-loader": "^2.1.1",
+  		"dotenv": "^8.2.0",
+  		"eslint": "^6.8.0",
+  		"eslint-plugin-prettier": "^3.1.2",
+  		"eslint-plugin-vue": "^6.1.2",
+  		"glob-all": "^3.1.0",
+  		"html-beautify-webpack-plugin": "^1.0.5",
+  		"html-webpack-plugin": "^3.2.0",
+  		"mini-css-extract-plugin": "^0.6.0",
+  		"node-sass": "^4.13.0",
+  		"optimize-css-assets-webpack-plugin": "^5.0.3",
+  		"postcss-custom-properties": "^9.0.2",
+  		"postcss-loader": "^3.0.0",
+  		"prettier": "1.19.1",
+  		"purgecss-webpack-plugin": "^1.6.0",
+  		"sass-loader": "^8.0.0",
+  		"stylelint": "^13.0.0",
+  		"stylelint-config-prettier": "^8.0.1",
+  		"stylelint-prettier": "^1.1.2",
+  		"terser-webpack-plugin": "^2.2.2",
+  		"vue-loader": "^15.7.2",
+  		"vue-style-loader": "^4.1.2",
+  		"vue-svgicon": "^3.2.6",
+  		"vue-template-compiler": "^2.6.10",
+  		"webpack": "^4.30.0",
+  		"webpack-cli": "^3.3.0",
+  		"webpack-dev-server": "^3.3.1",
+  		"webpack-notifier": "^1.8.0"
+  	},
+  	"dependencies": {
+  		"@babel/polyfill": "^7.7.0",
+  		"core-js": "^3.4.8",
+  		"es6-promise": "^4.2.8",
+  		"intersection-observer": "^0.7.0",
+  		"jquery": "^3.4.1",
+  		"vue": "^2.6.10",
+  		"vue-router": "^3.1.2"
+  	},
+  	"resolutions": {
+  		"webpack-notifier/node-notifier": "6.0.0"
+  	},
+  	"browserslist": [
+  		"defaults",
+  		"not ie < 11",
+  		"last 2 versions",
+  		"> 1%",
+  		"iOS 7",
+  		"last 3 iOS versions"
+  	],
+  	"license": "MIT",
+  	"husky": {
+  		"hooks": {
+  			"pre-commit": "lint-staged"
+  		}
+  	},
+  	"lint-staged": {
+  		"*.{js,vue}": [
+  			"eslint --fix",
+  			"prettier --write"
+  		],
+  		"*.css": [
+  			"stylelint --fix",
+  			"prettier --write"
+  		],
+  		"*.scss": [
+  			"stylelint --syntax=scss --fix",
+  			"prettier --write"
+  		]
+  	}
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile

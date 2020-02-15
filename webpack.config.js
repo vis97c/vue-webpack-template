@@ -156,15 +156,22 @@ if (isProduction) {
 	const HtmlBeautifyPlugin = require("html-beautify-webpack-plugin");
 	const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 	const PurgecssPlugin = require("purgecss-webpack-plugin");
-	const glob = require("glob");
+	const glob = require("glob-all");
 	config.plugins.push(
 		new MiniCssExtractPlugin({
 			filename: "css/[name].css",
 		}),
 		new PurgecssPlugin({
-			paths: glob.sync(`${path.join(__dirname, "src")}/**/*`, {
-				nodir: true,
-			}),
+			paths: glob.sync(
+				[
+					path.join(__dirname, "./src/index.template.html"),
+					path.join(__dirname, "./src/js/**/*"),
+				],
+				{
+					nodir: true,
+				}
+			),
+
 			whitelistPatterns: [/vue-/],
 		}),
 		new HtmlWebpackPlugin({
@@ -299,7 +306,6 @@ if (isProduction) {
 } else {
 	//dev only
 	const WebpackNotifierPlugin = require("webpack-notifier");
-	let proxy_url = process.env.PROXY_URL;
 	config.plugins.push(
 		new HtmlWebpackPlugin({
 			filename: "index.html",
@@ -322,13 +328,6 @@ if (isProduction) {
 			hot: false,
 			inline: true,
 			contentBase: "public_html",
-			proxy: {
-				"*": {
-					target: proxy_url,
-					secure: false,
-					changeOrigin: true,
-				},
-			},
 			historyApiFallback: true,
 			open: true,
 		},
