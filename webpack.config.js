@@ -164,7 +164,7 @@ if (isProduction) {
 		new PurgecssPlugin({
 			paths: glob.sync(
 				[
-					path.join(__dirname, "./src/index.template.html"),
+					path.join(__dirname, "./src/index.original.html"),
 					path.join(__dirname, "./src/js/**/*"),
 				],
 				{
