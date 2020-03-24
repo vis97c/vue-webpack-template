@@ -4,14 +4,13 @@ require("es6-promise").polyfill();
 
 require("dotenv").config({ path: ".env" });
 
-const CopyPlugin = require("copy-webpack-plugin");
-const path = require("path");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const VueLoaderPlugin = require("vue-loader/lib/plugin");
-
-const mode = process.env.NODE_ENV || "development";
-const isProduction = mode === "production";
+const CopyPlugin = require("copy-webpack-plugin"),
+	path = require("path"),
+	HtmlWebpackPlugin = require("html-webpack-plugin"),
+	MiniCssExtractPlugin = require("mini-css-extract-plugin"),
+	VueLoaderPlugin = require("vue-loader/lib/plugin"),
+	mode = process.env.NODE_ENV || "development",
+	isProduction = mode === "production";
 
 function pkg(m) {
 	// get the name. E.g. node_modules/packageName/not/this/part.js
@@ -30,7 +29,6 @@ function pkg(m) {
 //webpack defaults
 var config = {
 	entry: {
-		polyfill: "@babel/polyfill",
 		main: "./src/js/app.js",
 	},
 	resolve: {
@@ -54,6 +52,8 @@ var config = {
 		rules: [
 			{
 				test: /\.js$/,
+				// exclude: /node_modules/,
+				include: path.resolve(__dirname, "src"),
 				exclude: /node_modules/,
 				use: {
 					loader: "babel-loader",
@@ -61,6 +61,8 @@ var config = {
 			},
 			{
 				test: /\.vue$/,
+				// exclude: /node_modules/,
+				include: path.resolve(__dirname, "src"),
 				exclude: /node_modules/,
 				use: [
 					{
@@ -73,6 +75,8 @@ var config = {
 			},
 			{
 				test: /\.css$/i,
+				// exclude: /node_modules/,
+				include: path.resolve(__dirname, "src"),
 				use: [
 					/**
 					 * MiniCssExtractPlugin doesn't support HMR.
@@ -85,24 +89,26 @@ var config = {
 			},
 			{
 				test: /\.s[ac]ss$/i,
+				// exclude: /node_modules/,
+				include: path.resolve(__dirname, "src"),
 				use: [
 					...(isProduction
 						? [
 								MiniCssExtractPlugin.loader,
 								"css-loader",
-								{
-									loader: "postcss-loader",
-									options: {
-										plugins: () => [
-											require("autoprefixer"),
-											require("postcss-custom-properties")(
-												{
-													// importFrom: path.resolve(__dirname, "src/scss/base/_variables.scss")
-												}
-											),
-										],
-									},
-								},
+								// {
+								// 	loader: "postcss-loader",
+								// 	options: {
+								// 		plugins: () => [
+								// 			require("autoprefixer"),
+								// 			require("postcss-custom-properties")(
+								// 				{
+								// 					// importFrom: path.resolve(__dirname, "src/scss/base/_variables.scss")
+								// 				}
+								// 			),
+								// 		],
+								// 	},
+								// },
 								"sass-loader", // Compiles Sass to CSS
 						  ]
 						: [
@@ -114,33 +120,42 @@ var config = {
 			},
 			{
 				test: /\.(png|jpg|gif|svg)$/,
+				// exclude: /node_modules/,
+				include: path.resolve(__dirname, "src"),
 				use: [
 					{
 						loader: "file-loader",
 						options: {
 							name: "images/[name].[ext]",
+							esModule: false,
 						},
 					},
 				],
 			},
 			{
 				test: /\.(mov|mp4|webm)$/,
+				// exclude: /node_modules/,
+				include: path.resolve(__dirname, "src"),
 				use: [
 					{
 						loader: "file-loader",
 						options: {
 							name: "video/[name].[ext]",
+							esModule: false,
 						},
 					},
 				],
 			},
 			{
 				test: /\.(woff|woff2|eot|ttf|otf)$/,
+				// exclude: /node_modules/,
+				include: path.resolve(__dirname, "src"),
 				use: [
 					{
 						loader: "file-loader",
 						options: {
 							name: "fonts/[name].[ext]",
+							esModule: false,
 						},
 					},
 				],
@@ -152,28 +167,30 @@ var config = {
 };
 if (isProduction) {
 	//production only
-	const TerserPlugin = require("terser-webpack-plugin");
-	const HtmlBeautifyPlugin = require("html-beautify-webpack-plugin");
-	const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
-	const PurgecssPlugin = require("purgecss-webpack-plugin");
-	const glob = require("glob-all");
+	const TerserPlugin = require("terser-webpack-plugin"),
+		HtmlBeautifyPlugin = require("html-beautify-webpack-plugin"),
+		ScriptExtHtmlWebpackPlugin = require("script-ext-html-webpack-plugin"),
+		OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+	// PurgecssPlugin = require("purgecss-webpack-plugin"),
+	// glob = require("glob-all");
+	config.output.pathinfo = false;
 	config.plugins.push(
 		new MiniCssExtractPlugin({
 			filename: "css/[name].css",
 		}),
-		new PurgecssPlugin({
-			paths: glob.sync(
-				[
-					path.join(__dirname, "./src/index.original.html"),
-					path.join(__dirname, "./src/js/**/*"),
-				],
-				{
-					nodir: true,
-				}
-			),
+		// new PurgecssPlugin({
+		// 	paths: glob.sync(
+		// 		[
+		// 			path.join(__dirname, "./src/index.original.html"),
+		// 			path.join(__dirname, "./src/js/**/*"),
+		// 		],
+		// 		{
+		// 			nodir: true,
+		// 		}
+		// 	),
 
-			whitelistPatterns: [/vue-/],
-		}),
+		// 	whitelistPatterns: [/vue-/],
+		// }),
 		new HtmlWebpackPlugin({
 			filename: "index.html",
 			template: "src/index.original.html",
@@ -185,6 +202,9 @@ if (isProduction) {
 					format: "beautify",
 				},
 			},
+		}),
+		new ScriptExtHtmlWebpackPlugin({
+			defaultAttribute: "defer",
 		}),
 		new HtmlBeautifyPlugin({
 			config: {
@@ -254,9 +274,11 @@ if (isProduction) {
 										return `view.${prefix +
 											moduleName}-vue`;
 									}
+									return "root";
 								}
+								return "unknown";
 							}
-							return "bundle";
+							return "styles";
 						},
 						test: /\.vue$/,
 						reuseExistingChunk: true,
@@ -266,12 +288,12 @@ if (isProduction) {
 					},
 					// Merge all the CSS into one file
 					styles: {
-						name: "bundle",
+						name: "styles",
 						test: /\.s?css$/,
 						reuseExistingChunk: true,
 						enforce: true,
 						chunks: "all",
-						minSize: 20000,
+						minSize: 0,
 					},
 				},
 			},
@@ -288,17 +310,24 @@ if (isProduction) {
 					extractComments: false,
 				}),
 				new OptimizeCSSAssetsPlugin({
-					cssProcessor: require("cssnano"),
-					cssProcessorPluginOptions: {
-						preset: [
-							"default",
-							{
-								discardComments: {
-									removeAll: true,
+					cssProcessor: require("postcss")([
+						require("autoprefixer"),
+						require("postcss-custom-properties")({
+							// importFrom: path.resolve(__dirname, "src/scss/base/_variables.scss")
+						}),
+						require("postcss-combine-media-query"),
+						require("cssnano")({
+							preset: [
+								"default",
+								{
+									discardComments: {
+										removeAll: true,
+									},
+									calc: false,
 								},
-							},
-						],
-					},
+							],
+						}),
+					]),
 				}),
 			],
 		},
@@ -329,7 +358,7 @@ if (isProduction) {
 			inline: true,
 			contentBase: "public_html",
 			historyApiFallback: true,
-			open: true,
+			open: process.env.BROWSER,
 		},
 	});
 }

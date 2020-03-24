@@ -4,4 +4,5 @@ public_html
 package-lock.json
 src/js/compiled-icons
 *.lock
+*.log
 .env

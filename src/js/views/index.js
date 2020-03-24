@@ -42,7 +42,7 @@ const views = new VueRouter({
 		},
 		{
 			path: "/404",
-			name: "404",
+			name: "NotFound",
 			component: loadView("_not_found"),
 			meta: {
 				title: "_blank | 404",

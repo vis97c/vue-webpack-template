@@ -33,14 +33,14 @@
 		<!-- <script type="text/javascript" src="/js/pwa-loader.js"></script> -->
 
 		<!-- inicia SEO -->
-		<title>NOMBRE_DEL_SITIO | PAGE_TITLE</title>
+		<title>SITENAME | PAGE_TITLE</title>
 		<link type="image/ico" rel="icon" href="/favicon.ico" />
 		<link rel="canonical" href="https://www.DOMAIN/" />
 		<meta name="description" content="DESCRIPCION" />
 		<meta name="keywords" content="TAGS" />
 		<!-- inicia TWITTER CARD -->
 		<meta name="twitter:card" content="summary" />
-		<meta name="twitter:title" content="NOMBRE_DEL_SITIO | PAGE_TITLE" />
+		<meta name="twitter:title" content="SITENAME | PAGE_TITLE" />
 		<meta name="twitter:description" content="DESCRIPCION" />
 		<meta
 			name="twitter:image"
@@ -50,10 +50,10 @@
 		<meta name="twitter:site" content="@PERFIL_SITIO" />
 		<!-- termina TWITTER CARD -->
 		<!-- inicia OPEN GRAPH -->
-		<meta property="og:site_name" content="NOMBRE_DEL_SITIO" />
+		<meta property="og:site_name" content="SITENAME" />
 		<meta property="og:type" content="website" />
 		<meta property="og:url" content="https://www.DOMAIN" />
-		<meta property="og:title" content="NOMBRE_DEL_SITIO | PAGE_TITLE" />
+		<meta property="og:title" content="SITENAME | PAGE_TITLE" />
 		<meta property="og:description" content="DESCRIPCION" />
 		<meta
 			property="og:image"
@@ -143,13 +143,19 @@
 		<div id="appex"></div>
 		<script type="text/javascript">
 			window.domState = {
-				host: 'DOMAIN',
+				host: "DOMAIN",
 				meta: {
 					title: document.title,
-					description: document.querySelector("meta[name='description']").getAttribute('content'),
-					tags: document.querySelector("meta[name='keywords']").getAttribute('content'),
-					image: document.querySelector("meta[property='og:image']").getAttribute('content')
-				}
+					description: document
+						.querySelector("meta[name='description']")
+						.getAttribute("content"),
+					tags: document
+						.querySelector("meta[name='keywords']")
+						.getAttribute("content"),
+					image: document
+						.querySelector("meta[property='og:image']")
+						.getAttribute("content"),
+				},
 			};
 		</script>
 	</body>
