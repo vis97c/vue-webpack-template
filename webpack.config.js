@@ -44,7 +44,7 @@ var config = {
 	output: {
 		path: __dirname + "/public_html",
 		filename: "js/[name].js",
-		chunkFilename: "js/lazy/[name].js",
+		chunkFilename: "js/chunks/[name].js",
 		publicPath: "/",
 	},
 	plugins: [new VueLoaderPlugin()],
